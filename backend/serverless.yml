@@ -1,7 +1,7 @@
 # TODO: Change the name of the org 
 org: paul2405
-app: serverless-todo-app
-service: serverless-todo-app
+app: final-cloud-dev-app
+service: final-cloud-dev-app
 
 package:
   individually: true
@@ -30,7 +30,7 @@ provider:
   environment:
     TODOS_TABLE: Todos-${self:provider.stage}
     TODOS_CREATED_AT_INDEX: CreatedAtIndex
-    ATTACHMENT_S3_BUCKET: serverless-c4-todo-images-20231013-${self:provider.stage}
+    ATTACHMENT_S3_BUCKET: serverless-c4-todo-images-final-20231016-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
 
   logs:

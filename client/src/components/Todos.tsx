@@ -60,6 +60,36 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
     }
   }
 
+  handleSortDescending =  () => {
+    try {
+      const listSort = this.state.todos.sort((a, b) => {
+        return b.dueDate.localeCompare(a.dueDate);
+      })
+      this.setState({
+        todos: listSort
+      }, () => {
+        this.forceUpdate()
+      })
+    } catch (e) {
+      alert(`Failed to sort descending by date: ${(e as Error).message}`)
+    }
+  }
+
+  handleSortAscending = () => {
+    try {
+      const listSort = this.state.todos.sort((a, b) => {
+        return a.dueDate.localeCompare(b.dueDate);
+      })
+      this.setState({
+        todos: listSort
+      }, () => {
+        this.forceUpdate()
+      })
+    } catch (e) {
+      alert(`Failed to sort ascending by date: ${(e as Error).message}`)
+    }
+  }
+
   onTodoDelete = async (todoId: string) => {
     try {
       await deleteTodo(this.props.auth.getIdToken(), todoId)
@@ -133,6 +163,21 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
         <Grid.Column width={16}>
           <Divider />
         </Grid.Column>
+        <Grid.Column width={16}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Button
+              color='blue'
+              content='Sort ascending by date'
+              onClick={() => this.handleSortAscending()} 
+            />
+            <Button
+              color='blue'
+              content='Sort descending by date'
+              onClick={() => this.handleSortDescending()} 
+            />
+          </div>
+        <Divider />
+      </Grid.Column>
       </Grid.Row>
     )
   }
